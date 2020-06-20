@@ -1,3 +1,10 @@
+# qt
+.build-*
+.vscode/
+.idea/
+*.pro.user
+*backup*
+
 # Prerequisites
 *.d
 
