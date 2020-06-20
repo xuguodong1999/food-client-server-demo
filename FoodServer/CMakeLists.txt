@@ -9,7 +9,7 @@ if(MSVC)
     add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 else()
     # linux下修改到本地 Qt 库的cmake文件夹位置
-    set(Qt5_DIR "/home/xgd/Qt/5.14.2/gcc_64/lib/cmake/Qt5")
+    set(Qt5_DIR "/home/xgd/Qt/5.15.0/gcc_64/lib/cmake/Qt5")
 endif()
 
 find_package(Qt5 COMPONENTS Core Network Sql REQUIRED)

@@ -21,6 +21,7 @@ public:
     QLabel *getUinfo();
     QToolButton*getBtn1();
     QToolButton*getBtn2();
+    void setUser(const User&user);
 private:
     Ui::UserTodoForm *ui;
 };

@@ -126,9 +126,21 @@ FoodServer::FoodServer() {
                     case 7: {//订餐者添加订单
                         qDebug() << "添加订单";
                         Order o;
+                        User user;
                         reader >> o;
+                        QString info;
+                        switch (user.getUtype()) {
+                            case 3:
+                                info = "VIP1优惠: 使用1元红包进行结算抵扣。提示：消费满￥500成为为VIP-2类用户，结算价格可打九五折。";
+                                break;
+                            case 4:
+                                info = "VIP2优惠：结算价格打九五折。";
+                                break;
+                            default:
+                                info = "提示：消费满￥200成为为VIP-1类用户，每笔订单使用1元红包进行结算抵扣；消费满￥500成为为VIP-2类用户，结算价格可打九五折。";
+                        }
                         addOrder(o);
-                        writter << taskid << true;
+                        writter << taskid << true << info;
                         break;
                     }
                     case 8: {//商家查看订单
@@ -167,6 +179,25 @@ FoodServer::FoodServer() {
                             ordersInfo.push_back(oi);
                         }
                         writter << taskid << true << ordersInfo;
+
+                        //根据历史订单添加vip信息
+                        double historyPay = 0;
+                        auto orders2 = getOrder(order.getUid());
+                        for (auto &order2:orders2) {
+                            if (order2.getOstate() == 2) {
+                                historyPay += order2.getOpay();
+                            }
+                        }
+                        auto user = getUser(order.getUid())[0];
+                        int historyUtype = user.getUtype();
+                        if (historyPay >= 500) {
+                            user.setUtype(4);
+                        } else if (historyPay >= 200) {
+                            user.setUtype(3);
+                        }
+                        if (user.getUtype() != historyUtype) {
+                            updateUserVip(user);
+                        }
                         break;
                     }
                     case 10: {//用户查看订单
@@ -188,10 +219,25 @@ FoodServer::FoodServer() {
                     case 11: {//用户修改订单
                         qDebug() << "修改订餐者订单";
                         OrderAdapter order;
-                        reader >> order;
+                        User user;
+                        reader >> order >> user;
                         deleteOrder(order.getOid());
-                        if (order.getOstate() != 4)
+                        if (order.getOstate() != 4) {
+                            switch (user.getUtype()) {
+                                case 3:
+                                    user.setDiscount(make_shared<Vip1Discount>());
+                                    break;
+                                case 4:
+                                    user.setDiscount(make_shared<Vip2Discount>());
+                                    break;
+                                default:
+                                    user.setDiscount(make_shared<Discount>());
+                            }
+                            double pay = user.pay(order.getPrice() * order.getOnum());
+                            qDebug() << "pay: " << pay;
+                            order.setOpay(pay);
                             addOrder(order, true);
+                        }
                         auto orders = getOrder(order.getUid());
                         QList<OrderAdapter> ordersInfo;
                         for (auto &o:orders) {
@@ -206,11 +252,25 @@ FoodServer::FoodServer() {
                         break;
                     }
                     case 12: {//月销售额
-                        writter << taskid << true << QString("月销售额日志");
+                        auto result = getOrder();
+                        auto ret = getCountByMonth(result);
+                        QString info = "月销售额日志：\n";
+                        for (auto it = ret.cbegin(); it != ret.cend(); it++) {
+                            info.append(it.key());
+                            info.append(QString("销售额：￥%0\n").arg(it.value()));
+                        }
+                        writter << taskid << true << info;
                         break;
                     }
                     case 13: {//周销售额
-                        writter << taskid << true << QString("周销售额日志");
+                        auto result = getOrder();
+                        auto ret = getCountByWeek(result);
+                        QString info = "周销售额日志：\n";
+                        for (auto it = ret.cbegin(); it != ret.cend(); it++) {
+                            info.append(it.key());
+                            info.append(QString("销售额：￥%0\n").arg(it.value()));
+                        }
+                        writter << taskid << true << info;
                         break;
                     }
                     default:
@@ -306,7 +366,8 @@ void FoodServer::addProduct(const Product &product, bool putId) {
                 QString(R"(
     insert into ProductTable(uid, pstate, price, pname, pinfo, photo) values(%1,%2,%3,"%4","%5","%6")
     )").arg(product.getUid()).arg(product.getPstate())
-                        .arg(product.getPrice()).arg(product.getPname()).arg(product.getPinfo()).arg(product.getPhoto())
+                        .arg(product.getPrice()).arg(product.getPname()).arg(product.getPinfo()).arg(
+                                product.getPhoto())
         );
 }
 
@@ -317,7 +378,8 @@ void FoodServer::addOrder(const Order &order, bool putId) {
                 QString(R"(
     insert into OrderTable(oid, uid, pid, ostate, onum, opay, submittime) values(%0,%1,%2,%3,%4,%5,"%6")
     )").arg(order.getOid()).arg(order.getUid()).arg(order.getPid())
-                        .arg(order.getOstate()).arg(order.getOnum()).arg(order.getOpay()).arg(order.getSubmittime()));
+                        .arg(order.getOstate()).arg(order.getOnum()).arg(order.getOpay()).arg(
+                                order.getSubmittime()));
     } else
         q.exec(
                 QString(R"(
@@ -466,3 +528,50 @@ QList<Product> FoodServer::getProductByPid(const int pid) {
     qDebug() << "检索出：" << products.size() << "件产品";
     return products;
 }
+
+QList<QPair<QString, double>> FoodServer::getOrder() {
+    QSqlQuery q;
+    q.exec(QString("select submittime,opay from OrderTable where ostate==2"));
+    qDebug() << q.lastQuery() << q.lastError();
+    QList<QPair<QString, double>> result;
+    while (q.next()) {
+        result.push_back(qMakePair(q.value(0).toString(), q.value(1).toDouble()));
+    }
+    return result;
+}
+
+QHash<QString, double> FoodServer::getCountByMonth(const QList<QPair<QString, double>> &result) {
+    QHash<QString, double> count;
+    for (auto &r:result) {
+        auto split = r.first.split(" ");// 日期格式：周六 6月 20 09:31:45 2020
+        if (count.find(split[1]) == count.end()) {
+            count[split[1]] = r.second;
+        } else {
+            count[split[1]] += r.second;
+        }
+    }
+    return count;
+}
+
+QHash<QString, double> FoodServer::getCountByWeek(const QList<QPair<QString, double>> &result) {
+    QHash<QString, double> count;
+    for (auto &r:result) {
+        auto split = r.first.split(" ");// 日期格式：周六 6月 20 09:31:45 2020
+        if (count.find(split[0]) == count.end()) {
+            count[split[0]] = r.second;
+        } else {
+            count[split[0]] += r.second;
+        }
+    }
+    return count;
+}
+
+void FoodServer::updateUserVip(const User &user) {
+    QSqlQuery q;
+    q.exec(QString(R"(update UserTable set utype=%0 where uid=%1)")
+                   .arg(user.getUtype()).arg(user.getUid())
+    );
+    qDebug() << q.lastQuery() << q.lastError();
+}
+
+

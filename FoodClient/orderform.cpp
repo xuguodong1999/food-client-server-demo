@@ -7,19 +7,10 @@ OrderForm::OrderForm(QWidget *parent) :
     ui->setupUi(this);
     connect(getOnumBox(), QOverload<int>::of(&QSpinBox::valueChanged), [=](int value) {
         ui->opay->setValue(value * order.getPrice());
-        order.setOnum(value);
+        if (order.getOstate() != 2) {
+            order.setOnum(value);
+        }
     });
-//    connect(getOstateBox(), QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int value) {
-//        switch (value) {
-//            case 1:
-//                getBtn1()->setDisabled(true);
-//            case 2:
-//            case 3:
-//            case 4:
-//                getBtn1()->setDisabled(true);
-//                getBtn2()->setDisabled(true);
-//        }
-//    });
 }
 
 OrderForm::~OrderForm() {
@@ -68,6 +59,7 @@ void OrderForm::setOrder(const OrderAdapter &o) {
     ui->update->setText(order.getSubmittime());
     ui->ostate->setCurrentIndex(order.getOstate());
     ui->onum->setValue(order.getOnum());
+    ui->opay->setValue(order.getOpay());
 }
 
 void OrderForm::setBuyerMode() {

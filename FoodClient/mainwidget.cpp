@@ -89,7 +89,7 @@ MainWidget::MainWidget(QWidget *parent) :
                     switch (user.getUtype()) {
                         case 0:
                             builder = new SellerTodoBuilder();
-                            userTodoForm = controller.createUserTodoForm(builder,user);
+                            userTodoForm = controller.createUserTodoForm(builder, user);
                             connect(userTodoForm->getBtn1(), &QToolButton::clicked, this,
                                     &MainWidget::s_sellerProductView);
                             connect(userTodoForm->getBtn2(), &QToolButton::clicked, this,
@@ -97,7 +97,7 @@ MainWidget::MainWidget(QWidget *parent) :
                             break;
                         case 2:
                             builder = new AdminTodoBuilder();
-                            userTodoForm = controller.createUserTodoForm(builder,user);
+                            userTodoForm = controller.createUserTodoForm(builder, user);
                             // 管理员
                             connect(userTodoForm->getBtn1(), &QToolButton::clicked, [=]() {
                                 //发一条信息查询月销售额
@@ -118,7 +118,7 @@ MainWidget::MainWidget(QWidget *parent) :
                         case 3:
                         case 4:
                             builder = new BuyerTodoBuilder();
-                            userTodoForm = controller.createUserTodoForm(builder,user);
+                            userTodoForm = controller.createUserTodoForm(builder, user);
                             connect(userTodoForm->getBtn1(), &QToolButton::clicked, this,
                                     &MainWidget::s_buyerProductView);
                             connect(userTodoForm->getBtn2(), &QToolButton::clicked, this,
@@ -191,16 +191,18 @@ MainWidget::MainWidget(QWidget *parent) :
                 if (!success) {
                     qDebug() << "添加购物车失败";
                 } else {
+                    QString info;
+                    reader >>  info;
                     QMessageBox::StandardButton result = QMessageBox::information(
                             nullptr,
                             "成功添加到购物车",
-                            "去购物车结算吗",
+                            info + "去购物车结算吗",
                             QMessageBox::Yes | QMessageBox::No,
                             QMessageBox::No
                     );
                     switch (result) {
                         case QMessageBox::Yes:
-                            safeDelete(view);
+                        safeDelete(view);
                             s_buyerOrderView();
 //                            view->getBackBtn()->click();
                             break;
@@ -247,10 +249,10 @@ MainWidget::MainWidget(QWidget *parent) :
                 if (!success) {
                     qDebug() << "查询失败";
                 } else {
-                    QWidget*w=new QWidget();
+                    QWidget *w = new QWidget();
                     w->resize(size());
                     QPlainTextEdit *edit = new QPlainTextEdit();
-                    auto l=new QGridLayout();
+                    auto l = new QGridLayout();
                     l->addWidget(edit);
                     w->setLayout(l);
                     QString text;
@@ -353,7 +355,7 @@ void MainWidget::s_addOrder() {
     order.setOnum(1);
     order.setOpay(p.getPrice());
     order.setPid(p.getPid());
-    writer << 7 << order;//添加购物车
+    writer << 7 << order << user;//添加购物车
     query(binaryData);
 }
 
@@ -622,6 +624,6 @@ void MainWidget::s_buyerHandleOrder(bool accept) {
     } else {
         order.setOstate(4);
     }
-    writer << 11 << order;//用户修改订单
+    writer << 11 << order<<user;//用户修改订单
     query(binaryData);
 }
