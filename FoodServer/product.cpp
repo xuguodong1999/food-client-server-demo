@@ -26,7 +26,7 @@ int Product::getPstate() const {
     return pstate;
 }
 
-void Product::setPstate(int pstate) {
+void Product::setPstate(Pstate pstate) {
     Product::pstate = pstate;
 }
 

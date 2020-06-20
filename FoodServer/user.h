@@ -1,6 +1,6 @@
 #ifndef USER_H
 #define USER_H
-
+#include "config.h"
 #include <QString>
 #include <QDataStream>
 #include "discount.h"
@@ -26,7 +26,7 @@ public:
 
     int getUtype() const;
 
-    void setUtype(int utype);
+    void setUtype(Utype utype);
 
     const QString &getUname() const;
 

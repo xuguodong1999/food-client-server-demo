@@ -3,7 +3,9 @@
 
 #include <QDataStream>
 #include <QString>
+#include "config.h"
 
+// 订单类，对应于数据库订单表
 class Order {
 public:
     Order();
@@ -31,7 +33,7 @@ public:
 
     int getOstate() const;
 
-    void setOstate(int ostate);
+    void setOstate(Ostate ostate);
 
     int getOnum() const;
 
@@ -48,11 +50,15 @@ public:
 
 #include "product.h"
 #include "user.h"
-
-class OrderAdapter : public Order {
+// 订单类的装饰，对应于用户界面订单表，增加价格、用户名、商品名、商品照片
+class OrderDecorator : public Order {
+private:
+    double price;
+    QString uname, pname, photo;
 public:
-    OrderAdapter(){}
-    OrderAdapter(const Order &order) {
+    OrderDecorator() {}
+
+    OrderDecorator(const Order &order) {
         oid = order.getOid();
         uid = order.getUid();
         pid = order.getPid();
@@ -61,6 +67,10 @@ public:
         opay = order.getOpay();
         submittime = order.getSubmittime();
     }
+
+    friend QDataStream &operator>>(QDataStream &s, OrderDecorator &o);
+
+    friend QDataStream &operator<<(QDataStream &s, const OrderDecorator &o);
 
     void setProduct(const Product &product) {
         pname = product.getPname();
@@ -72,13 +82,6 @@ public:
         uname = user.getUname();
     }
 
-private:
-    double price;
-    QString uname, pname, photo;
-public:
-    friend QDataStream &operator>>(QDataStream &s, OrderAdapter &o);
-
-    friend QDataStream &operator<<(QDataStream &s, const OrderAdapter &o);
     const QString &getUname() const {
         return uname;
     }
@@ -94,8 +97,6 @@ public:
     double getPrice() const {
         return price;
     }
-
-
 };
 
 #endif // ORDER_H

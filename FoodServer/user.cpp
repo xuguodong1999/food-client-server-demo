@@ -19,7 +19,7 @@ int User::getUtype() const {
     return utype;
 }
 
-void User::setUtype(int utype) {
+void User::setUtype(Utype utype) {
     User::utype = utype;
 }
 

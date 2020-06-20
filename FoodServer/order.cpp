@@ -35,7 +35,7 @@ int Order::getOstate() const {
     return ostate;
 }
 
-void Order::setOstate(int ostate) {
+void Order::setOstate(Ostate ostate) {
     Order::ostate = ostate;
 }
 
@@ -73,14 +73,14 @@ QDataStream &operator>>(QDataStream &s, Order &o) {
     return s;
 }
 
-QDataStream &operator<<(QDataStream &s, const OrderAdapter &o) {
-    s << o.oid << o.uid << o.pid << o.ostate << o.onum << o.opay << o.submittime << o.price << o.uname << o.pname
-      << o.photo;
+QDataStream &operator<<(QDataStream &s, const OrderDecorator &o) {
+    s << o.oid << o.uid << o.pid << o.ostate << o.onum << o.opay << o.submittime
+      << o.price << o.uname << o.pname << o.photo;
     return s;
 }
 
-QDataStream &operator>>(QDataStream &s, OrderAdapter &o) {
-    s >> o.oid >> o.uid >> o.pid >> o.ostate >> o.onum >> o.opay >> o.submittime >> o.price >> o.uname >> o.pname
-      >> o.photo;;
+QDataStream &operator>>(QDataStream &s, OrderDecorator &o) {
+    s >> o.oid >> o.uid >> o.pid >> o.ostate >> o.onum >> o.opay >> o.submittime
+      >> o.price >> o.uname >> o.pname >> o.photo;;
     return s;
 }

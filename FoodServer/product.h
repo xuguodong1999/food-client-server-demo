@@ -1,17 +1,21 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
+#include "config.h"
 #include <QDataStream>
 #include <QString>
-class Product
-{
+
+class Product {
 public:
     Product();
+
     friend QDataStream &operator>>(QDataStream &s, Product &product);
+
     friend QDataStream &operator<<(QDataStream &s, const Product &product);
+
 private:
-    int pid,uid,pstate;
-    QString pname,pinfo,photo;
+    int pid, uid, pstate;
+    QString pname, pinfo, photo;
     double price;
 public:
     int getPid() const;
@@ -24,7 +28,7 @@ public:
 
     int getPstate() const;
 
-    void setPstate(int pstate);
+    void setPstate(Pstate pstate);
 
     const QString &getPname() const;
 
@@ -41,9 +45,6 @@ public:
     double getPrice() const;
 
     void setPrice(double price);
-
-
-
 };
 
 #endif // PRODUCT_H

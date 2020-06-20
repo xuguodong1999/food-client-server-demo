@@ -17,6 +17,7 @@ SOURCES += \
     user.cpp
 
 HEADERS += \
+    config.h \
     discount.h \
     foodserver.h \
     order.h \

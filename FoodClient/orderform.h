@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QToolButton>
 #include <QLineEdit>
+#include <QComboBox>
 #include <QDoubleSpinBox>
 #include "order.h"
 
