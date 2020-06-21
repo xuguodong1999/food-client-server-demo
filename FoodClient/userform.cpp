@@ -36,7 +36,7 @@ UserForm::~UserForm() {
 User UserForm::getUser() {
     User user;
     user.setUid(-1);
-    user.setUtype(ui->utype->currentIndex());
+    user.setUtype(Utype(ui->utype->currentIndex()));
     user.setUname(ui->uname->text());
     user.setPassword(ui->password->text());
     QByteArray imageData;

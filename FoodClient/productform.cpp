@@ -67,7 +67,7 @@ void ProductForm::setProduct(const Product &product) {
 
 Product ProductForm::getProduct() {
     p.setPrice(getPriceBox()->value());
-    p.setPstate(getPstateBox()->currentIndex());
+    p.setPstate(Pstate(getPstateBox()->currentIndex()));
     p.setPinfo(getPinfoEdit()->text());
     p.setPname(getPnameEdit()->text());
     QByteArray imageData;

@@ -17,24 +17,30 @@ public:
 
     // 准备适用与select、delete的单条件查询
     void queryByInt(const QString &action, const QString &idName, int value) {
-        query = (action + " * from " + tableName + " where " + idName + "=%1").arg(value);
+        QString tmp=" * ";
+        if(action=="delete")tmp=" ";
+        query = (action + tmp+"from " + tableName + " where " + idName + "=%1").arg(value);
     }
 
     // 准备适用与select、delete的单条件查询
     void queryByString(const QString &action, const QString &idName, const QString &value) {
-        query = (action + " * from " + tableName + " where " + idName + "=\"%1\"").arg(value);
+        QString tmp=" * ";
+        if(action=="delete")tmp=" ";
+        query = (action + tmp+"from " + tableName + " where " + idName + "=\"%1\"").arg(value);
     }
 
     // 准备适用与select、delete的单条件查询
     void queryAll(const QString &action) {
-        query = action + " * from " + tableName;
+        QString tmp=" * ";
+        if(action=="delete")tmp=" ";
+        query = action + tmp+"from " + tableName;
     }
 
     // 执行语句
     QSqlQuery &exec() {
         q.exec(query);
         error = q.lastError().text();
-        if (logging) {
+        if (1||logging) {
             qDebug() << getQuery() << "\n" << getError();
         }
         return q;

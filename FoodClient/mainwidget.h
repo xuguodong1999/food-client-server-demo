@@ -30,8 +30,8 @@ private:
     void popSellerProductView(QList<Product>&products);
     void popBuyerProductView(QList<Product>&products);
 
-    void popSellerOrderView(QList<OrderAdapter>&orders);
-    void popBuyerOrderView(QList<OrderAdapter>&orders);
+    void popSellerOrderView(QList<OrderWithFullInfo>&orders);
+    void popBuyerOrderView(QList<OrderWithFullInfo>&orders);
 
     // 订单和产品的函数需要知道被操作的表单，在connect的时候修改当前表单指针的指向
     void s_addProduct();//发送卖家产品添加信息

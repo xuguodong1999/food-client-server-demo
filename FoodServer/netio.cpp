@@ -83,7 +83,7 @@ void NetIO::handle_buyerViewProduct(QDataStream &reader, QDataStream &writter) {
 // 输入请求编号7、订单
 // 输出回复编号7、状态、促销信息
 void NetIO::handle_buyerAddOrder(QDataStream &reader, QDataStream &writter) {
-    qDebug() << "添加订单";
+//    qDebug() << "添加订单";
     Order order;
     User user;
     reader >> order >> user;
@@ -110,7 +110,9 @@ void NetIO::handle_buyerAddOrder(QDataStream &reader, QDataStream &writter) {
 void NetIO::handle_sellerViewOrder(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
+    qDebug()<<"uid = "<<uid;
     auto orders = OrderDb::db_getOrder4Seller(uid);
+    qDebug()<<"orders.size() = "<<orders.size();
     auto fullOrders = OrderDb::getOrdersWithFullInfo(orders);
     writter << taskid << true << fullOrders;
 }
@@ -123,11 +125,11 @@ void NetIO::handle_sellerChangeOrder(QDataStream &reader, QDataStream &writter) 
 
     OrderDb::db_delOrder(order.getOid());
     OrderDb::db_addOrder(order, true);
-
     // 在服务端补充订单表的信息
     auto p = ProductDb::db_getProduct(order.getPid());
-    auto orders = OrderDb::db_getOrder(p[0].getUid());
+    auto orders = OrderDb::db_getOrder4Seller(p[0].getUid());
     auto fullOrders = OrderDb::getOrdersWithFullInfo(orders);
+    qDebug()<<"fullOrders.size() = "<<fullOrders.size();
     writter << taskid << true << fullOrders;
     //根据历史订单添加vip信息
     updateVip(order.getUid());
@@ -167,12 +169,12 @@ void NetIO::handle_buyerViewOrder(QDataStream &reader, QDataStream &writter) {
 // 输入请求编号11、用户id
 // 输出回复编号11、状态、属于用户的订单
 void NetIO::handle_buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
-    qDebug() << "修改订餐者订单";
+//    qDebug() << "修改订餐者订单";
     OrderWithFullInfo order;
     User user;
     reader >> order >> user;
     OrderDb::db_delOrder(order.getOid());
-    if (order.getOstate() != 4) {
+    if (order.getOstate() != userDelete) {
         switch (Utype(user.getUtype())) {
             case vip1:
                 user.setDiscount(std::make_shared<Vip1Discount>());
@@ -184,7 +186,7 @@ void NetIO::handle_buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
                 user.setDiscount(std::make_shared<Discount>());
         }
         double pay = user.pay(order.getPrice() * order.getOnum());
-        qDebug() << "pay: " << pay;
+//        qDebug() << "pay: " << pay;
         order.setOpay(pay);
         OrderDb::db_addOrder(order, true);
     }
@@ -222,6 +224,7 @@ void NetIO::handle_weekSalesCount(QDataStream &reader, QDataStream &writter) {
 QByteArray NetIO::process() {
     QDataStream reader(&buffer, QIODevice::ReadOnly);
     reader >> taskid;
+    qDebug()<<"taskid = "<<taskid;
     QByteArray result;
     QDataStream writter(&result, QIODevice::WriteOnly);
     qint64 dataSize = 0;

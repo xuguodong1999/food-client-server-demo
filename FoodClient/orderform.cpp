@@ -49,7 +49,7 @@ QComboBox *OrderForm::getOstateBox() {
     return ui->ostate;
 }
 
-void OrderForm::setOrder(const OrderAdapter &o) {
+void OrderForm::setOrder(const OrderWithFullInfo &o) {
     order = o;
     QByteArray imageData = QByteArray::fromBase64(order.getPhoto().toLatin1());
     QPixmap image;
@@ -70,12 +70,12 @@ void OrderForm::setBuyerMode() {
     getBtn1()->setText("结算");
     getBtn2()->setText("删除");
     switch (order.getOstate()) {
-        case 1:
+        case submit:
             getBtn1()->setDisabled(true);
             getOnumBox()->setDisabled(true);
-        case 2:
-        case 3:
-        case 4:
+        case done:
+        case sellerReject:
+        case userDelete:
             getBtn1()->setDisabled(true);
             getBtn2()->setDisabled(true);
             getOnumBox()->setDisabled(true);
@@ -91,14 +91,14 @@ void OrderForm::setSellerMode() {
     getBtn1()->setText("接受");
     getBtn2()->setText("拒收");
     switch (order.getOstate()) {
-        case 2:
-        case 3:
-        case 4:
+        case done:
+        case sellerReject:
+        case userDelete:
             getBtn1()->setDisabled(true);
             getBtn2()->setDisabled(true);
     }
 }
 
-OrderAdapter OrderForm::getOrder() {
+OrderWithFullInfo OrderForm::getOrder() {
     return order;
 }

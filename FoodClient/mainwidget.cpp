@@ -45,8 +45,8 @@ MainWidget::MainWidget(QWidget *parent) :
         if (binaryData.isEmpty()) {
             binaryData.append(tmp);
             reader0 >> dataSize;
-            qDebug() << "标识长度：" << dataSize;
-            qDebug() << "当前长度：" << binaryData.length();
+//            qDebug() << "标识长度：" << dataSize;
+//            qDebug() << "当前长度：" << binaryData.length();
             if (binaryData.size() < dataSize) {
                 return;
             }
@@ -136,10 +136,10 @@ MainWidget::MainWidget(QWidget *parent) :
                 if (!success) {
                     qDebug() << "查询失败";
                 } else {
-                    qDebug() << "处理卖家产品数据";
+//                    qDebug() << "处理卖家产品数据";
                     QList<Product> products;
                     reader >> products;
-                    qDebug() << "接收到：" << products.size() << "件产品-" << binaryData.size();
+//                    qDebug() << "接收到：" << products.size() << "件产品-" << binaryData.size();
                     popSellerProductView(products);
                 }
                 break;
@@ -222,7 +222,7 @@ MainWidget::MainWidget(QWidget *parent) :
                     qDebug() << "查询失败";
                 } else {
                     qDebug() << "处理卖家订单";
-                    QList<OrderAdapter> orders;
+                    QList<OrderWithFullInfo> orders;
                     reader >> orders;
                     popSellerOrderView(orders);
                 }
@@ -235,8 +235,8 @@ MainWidget::MainWidget(QWidget *parent) :
                 if (!success) {
                     qDebug() << "查询失败";
                 } else {
-                    qDebug() << "处理订餐者订单";
-                    QList<OrderAdapter> orders;
+//                    qDebug() << "处理订餐者订单";
+                    QList<OrderWithFullInfo> orders;
                     reader >> orders;
                     popBuyerOrderView(orders);
                 }
@@ -266,10 +266,11 @@ MainWidget::MainWidget(QWidget *parent) :
             default:
                 break;
         }
-        qDebug() << "清空缓存";
+//        qDebug() << "清空缓存";
         binaryData = QByteArray();
     });
 }
+
 
 MainWidget::~MainWidget() {
 
@@ -351,7 +352,7 @@ void MainWidget::s_addOrder() {
     Order order;
     order.setUid(user.getUid());
     order.setSubmittime(QDateTime::currentDateTime().toString());
-    order.setOstate(0);
+    order.setOstate(incart);
     order.setOnum(1);
     order.setOpay(p.getPrice());
     order.setPid(p.getPid());
@@ -364,9 +365,9 @@ void MainWidget::s_sellerHandleOrder(bool accept) {
     QDataStream writer(&binaryData, QIODevice::WriteOnly);
     auto order = currentOrderForm->getOrder();
     if (accept) {
-        order.setOstate(2);
+        order.setOstate(done);
     } else {
-        order.setOstate(3);
+        order.setOstate(sellerReject);
     }
     writer << 9 << order;//商家修改订单
     query(binaryData);
@@ -391,7 +392,7 @@ void MainWidget::popSellerProductView(QList<Product> &products) {
     }
     // 添加新产品的接口
     QToolButton *addBtn = new QToolButton();
-    addBtn->setFixedSize(880, 220);
+    addBtn->setFixedSize(getSubWindowSize());
     addBtn->setText("点击添加产品...");
     connect(addBtn, &QToolButton::clicked, [=]() {
         qDebug() << "添加产品";
@@ -486,7 +487,7 @@ void MainWidget::popBuyerProductView(QList<Product> &products) {
     });
 }
 
-void MainWidget::popSellerOrderView(QList<OrderAdapter> &orders) {
+void MainWidget::popSellerOrderView(QList<OrderWithFullInfo> &orders) {
     QList<QWidget *> widgets;
     if (view != nullptr) {
         safeDelete(view);
@@ -550,7 +551,7 @@ void MainWidget::popSellerOrderView(QList<OrderAdapter> &orders) {
     });
 }
 
-void MainWidget::popBuyerOrderView(QList<OrderAdapter> &orders) {
+void MainWidget::popBuyerOrderView(QList<OrderWithFullInfo> &orders) {
     QList<QWidget *> widgets;
     if (view != nullptr) {
         safeDelete(view);
@@ -620,10 +621,10 @@ void MainWidget::s_buyerHandleOrder(bool accept) {
     auto order = currentOrderForm->getOrder();
     order.setSubmittime(QDateTime::currentDateTime().toString());
     if (accept) {
-        order.setOstate(1);
+        order.setOstate(submit);
     } else {
-        order.setOstate(4);
+        order.setOstate(userDelete);
     }
-    writer << 11 << order<<user;//用户修改订单
+    writer << 11 << order<<user;//买家修改订单
     query(binaryData);
 }

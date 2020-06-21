@@ -19,10 +19,10 @@ public:
     explicit OrderForm(QWidget *parent = nullptr);
 
     ~OrderForm();
-    void setOrder(const OrderAdapter&o);
+    void setOrder(const OrderWithFullInfo&o);
     void setBuyerMode();
     void setSellerMode();
-    OrderAdapter getOrder();
+    OrderWithFullInfo getOrder();
 
     QToolButton *getPhotoBtn();
 
@@ -42,7 +42,7 @@ public:
 
 private:
     Ui::OrderForm *ui;
-    OrderAdapter order;
+    OrderWithFullInfo order;
 };
 
 #endif // ORDERFORM_H
