@@ -1,5 +1,6 @@
 # qt
 .build-*
+build-*
 .vscode/
 .idea/
 *.pro.user
