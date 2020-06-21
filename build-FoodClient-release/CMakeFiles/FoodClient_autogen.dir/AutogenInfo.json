@@ -1,0 +1,153 @@
+{
+	"BUILD_DIR" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/FoodClient_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient",
+	"CMAKE_EXECUTABLE" : "C:/Users/xgd/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/201.7846.88/bin/cmake/win/bin/cmake.exe",
+	"CMAKE_SOURCE_DIR" : "C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient",
+	"HEADERS" : 
+	[
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/mainwidget.h",
+			"MU",
+			"EWIEGA46WW/moc_mainwidget.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/order.h",
+			"MU",
+			"EWIEGA46WW/moc_order.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/orderform.h",
+			"MU",
+			"EWIEGA46WW/moc_orderform.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/product.h",
+			"MU",
+			"EWIEGA46WW/moc_product.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/productform.h",
+			"MU",
+			"EWIEGA46WW/moc_productform.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/user.h",
+			"MU",
+			"EWIEGA46WW/moc_user.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/userform.h",
+			"MU",
+			"EWIEGA46WW/moc_userform.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/usertodoform.h",
+			"MU",
+			"EWIEGA46WW/moc_usertodoform.cpp"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/viewwidget.h",
+			"MU",
+			"EWIEGA46WW/moc_viewwidget.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/FoodClient_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/FoodClient_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NETWORK_LIB",
+		"QT_NO_DEBUG",
+		"QT_WIDGETS_LIB",
+		"WIN32"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"C:/Qt/5.14.2/msvc2017_64/include",
+		"C:/Qt/5.14.2/msvc2017_64/include/QtWidgets",
+		"C:/Qt/5.14.2/msvc2017_64/include/QtGui",
+		"C:/Qt/5.14.2/msvc2017_64/include/QtANGLE",
+		"C:/Qt/5.14.2/msvc2017_64/include/QtCore",
+		"C:/Qt/5.14.2/msvc2017_64/mkspecs/win32-msvc",
+		"C:/Qt/5.14.2/msvc2017_64/include/QtNetwork"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : [],
+	"MOC_PREDEFS_FILE" : "",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/qrc_image.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/CMakeFiles/FoodClient_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Qt/5.14.2/msvc2017_64/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Qt/5.14.2/msvc2017_64/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/CMakeFiles/FoodClient_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/main.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/mainwidget.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/order.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/orderform.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/product.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/productform.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/user.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/userform.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/usertodoform.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/xgd/source/repos/Food-DesignPattern/FoodClient/viewwidget.cpp",
+			"MU"
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : 
+	[
+		"C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/qrc_image.cpp"
+	],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

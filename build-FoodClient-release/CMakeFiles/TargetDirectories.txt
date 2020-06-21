@@ -1,0 +1,4 @@
+C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/CMakeFiles/FoodClient.dir
+C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/CMakeFiles/edit_cache.dir
+C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/CMakeFiles/rebuild_cache.dir
+C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodClient-release/CMakeFiles/FoodClient_autogen.dir

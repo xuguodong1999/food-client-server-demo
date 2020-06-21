@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="FoodServer"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\Qt\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Core\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Network\;CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Sql\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="FoodServer">
+				<Option output="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/FoodServer.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NO_DEBUG"/>
+					<Add option="-DQT_SQL_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add directory="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/FoodServer_autogen/include"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/./mkspecs/win32-msvc"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include/QtSql"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include/QtNetwork"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 FoodServer"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="FoodServer/fast">
+				<Option output="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/FoodServer.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NO_DEBUG"/>
+					<Add option="-DQT_SQL_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add directory="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/FoodServer_autogen/include"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/./mkspecs/win32-msvc"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include/QtSql"/>
+					<Add directory="C:/Qt/5.14.2/msvc2017_64/include/QtNetwork"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 FoodServer/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="FoodServer_autogen">
+				<Option working_dir="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 FoodServer_autogen"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\xgd\source\repos\Food-DesignPattern\build-FoodServer-release\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/db.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/db.h">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/foodserver.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/foodserver.h">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/main.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/netio.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/netio.h">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/order.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/order.h">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/product.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/product.h">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/user.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/user.h">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/FoodServer_autogen/mocs_compilation.cpp">
+			<Option target="FoodServer"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5/Qt5Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Network/Qt5NetworkConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Network\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Network/Qt5NetworkConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Network\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Network\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Sql/Qt5SqlConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Sql\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Sql/Qt5SqlConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Sql\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Sql/Qt5Sql_QODBCDriverPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Sql\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Sql/Qt5Sql_QPSQLDriverPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Sql\"/>
+		</Unit>
+		<Unit filename="C:/Users/xgd/source/repos/Food-DesignPattern/FoodServer/../../../../../../Qt/5.14.2/msvc2017_64/lib/cmake/Qt5Sql/Qt5Sql_QSQLiteDriverPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\Qt\5.14.2\msvc2017_64\lib\cmake\Qt5Sql\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -18,7 +18,7 @@ enum Ostate {
     sellerReject = 3,
     userDelete = 4
 };
-enum Service{
+enum Service {
     new_user,
 
 };

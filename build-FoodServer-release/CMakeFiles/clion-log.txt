@@ -1,0 +1,4 @@
+C:\Users\xgd\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - NMake Makefiles" C:\Users\xgd\source\repos\Food-DesignPattern\FoodServer
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release
