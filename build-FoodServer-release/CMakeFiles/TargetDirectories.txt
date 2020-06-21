@@ -1,4 +1,0 @@
-C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/CMakeFiles/FoodServer.dir
-C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/CMakeFiles/edit_cache.dir
-C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/CMakeFiles/rebuild_cache.dir
-C:/Users/xgd/source/repos/Food-DesignPattern/build-FoodServer-release/CMakeFiles/FoodServer_autogen.dir

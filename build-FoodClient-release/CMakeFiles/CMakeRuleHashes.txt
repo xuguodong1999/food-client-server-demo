@@ -1,3 +1,0 @@
-# Hashes of file build rules.
-4c112850be9d008b96e115c877c19b3d CMakeFiles/FoodClient_autogen
-66c38608d138f3f9364b2560eb37451e qrc_image.cpp
