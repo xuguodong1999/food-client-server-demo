@@ -2,61 +2,61 @@
 
 using namespace std;
 
-QList<User> UserDb::db_getUser(const QString &username) {
+QList<User> UserDbHandler::db_getUser(const QString &username) {
     auto db = DbHandlerFactory::getDbHandler("UserTable");
     db->queryByString("select", "uname", username);
-    return UserDb::queryUsers(db->exec());
+    return UserDbHandler::queryUsers(db->exec());
 }
 
-QList<User> UserDb::db_getUser(const int uid) {
+QList<User> UserDbHandler::db_getUser(const int uid) {
     auto db = DbHandlerFactory::getDbHandler("UserTable");
     db->queryByInt("select", "uid", uid);
-    return UserDb::queryUsers(db->exec());
+    return UserDbHandler::queryUsers(db->exec());
 }
 
-void ProductDb::db_delProduct(const int pid) {
+void ProductDbHandler::db_delProduct(const int pid) {
     auto db = DbHandlerFactory::getDbHandler("ProductTable");
     db->queryByInt("delete", "pid", pid);
     db->exec();//不需要处理返回值
 }
 
-QList<Product> ProductDb::db_getProduct() {
+QList<Product> ProductDbHandler::db_getProduct() {
     auto db = DbHandlerFactory::getDbHandler("ProductTable");
     db->queryAll("select");
-    return ProductDb::queryProducts(db->exec());
+    return ProductDbHandler::queryProducts(db->exec());
 }
 
-QList<Product> ProductDb::db_getProduct4Seller(const int uid) {
+QList<Product> ProductDbHandler::db_getProduct4Seller(const int uid) {
     auto db = DbHandlerFactory::getDbHandler("ProductTable");
     db->queryByInt("select", "uid", uid);
-    return ProductDb::queryProducts(db->exec());
+    return ProductDbHandler::queryProducts(db->exec());
 }
 
-void OrderDb::db_delOrder(const int oid) {
+void OrderDbHandler::db_delOrder(const int oid) {
     auto db = DbHandlerFactory::getDbHandler("OrderTable");
     db->queryByInt("delete", "oid", oid);
     db->exec();//不需要处理返回值
 }
 
-QList<Order> OrderDb::db_getOrder(const int uid) {
+QList<Order> OrderDbHandler::db_getOrder(const int uid) {
     auto db = DbHandlerFactory::getDbHandler("OrderTable");
     db->queryByInt("select", "uid", uid);
-    return OrderDb::queryOrders(db->exec());
+    return OrderDbHandler::queryOrders(db->exec());
 }
 
-QList<Product> ProductDb::db_getProduct(const int pid) {
+QList<Product> ProductDbHandler::db_getProduct(const int pid) {
     auto db = DbHandlerFactory::getDbHandler("ProductTable");
     db->queryByInt("select", "pid", pid);
-    return ProductDb::queryProducts(db->exec());
+    return ProductDbHandler::queryProducts(db->exec());
 }
 
-QList<Order> OrderDb::db_getOrderDone() {
+QList<Order> OrderDbHandler::db_getOrderDone() {
     auto db = DbHandlerFactory::getDbHandler("OrderTable");
     db->queryByInt("select", "ostate", Ostate::done);
-    return OrderDb::queryOrders(db->exec());
+    return OrderDbHandler::queryOrders(db->exec());
 }
 
-QHash<QString, double> OrderDb::getCountByMonth(const QList<Order> &orders) {
+QHash<QString, double> OrderDbHandler::getCountByMonth(const QList<Order> &orders) {
     QHash<QString, double> count;
     for (auto &r:orders) {
         auto split = r.getSubmittime().split(" ");// 日期示例：周六 6月 20 09:31:45 2020
@@ -69,7 +69,7 @@ QHash<QString, double> OrderDb::getCountByMonth(const QList<Order> &orders) {
     return count;
 }
 
-QHash<QString, double> OrderDb::getCountByWeek(const QList<Order> &orders) {
+QHash<QString, double> OrderDbHandler::getCountByWeek(const QList<Order> &orders) {
     QHash<QString, double> count;
     for (auto &r:orders) {
         auto split = r.getSubmittime().split(" ");// 日期示例：周六 6月 20 09:31:45 2020
@@ -82,7 +82,7 @@ QHash<QString, double> OrderDb::getCountByWeek(const QList<Order> &orders) {
     return count;
 }
 
-void UserDb::db_updateUserType(const User &user) {
+void UserDbHandler::db_updateUserType(const User &user) {
     QSqlQuery q;
     q.exec(QString(R"(update UserTable set utype=%0 where uid=%1)")
                    .arg(user.getUtype()).arg(user.getUid())
@@ -90,7 +90,7 @@ void UserDb::db_updateUserType(const User &user) {
     qDebug() << q.lastQuery() << q.lastError();
 }
 
-bool UserDb::db_addUser(const User &user) {
+bool UserDbHandler::db_addUser(const User &user) {
     if (!db_getUser(user.getUname()).isEmpty()) {
         return false;//不允许用户名重复
     }
@@ -102,7 +102,7 @@ bool UserDb::db_addUser(const User &user) {
     return true;
 }
 
-void ProductDb::db_addProduct(const Product &product, bool putId) {
+void ProductDbHandler::db_addProduct(const Product &product, bool putId) {
     auto db = DbHandlerFactory::getDbHandler("");
     QString query;
     if (putId) {
@@ -119,7 +119,7 @@ void ProductDb::db_addProduct(const Product &product, bool putId) {
     db->exec(query);
 }
 
-void OrderDb::db_addOrder(const Order &order, bool putId) {
+void OrderDbHandler::db_addOrder(const Order &order, bool putId) {
     auto db = DbHandlerFactory::getDbHandler("");
     QString query;
     if (putId) {
@@ -136,7 +136,7 @@ void OrderDb::db_addOrder(const Order &order, bool putId) {
     db->exec(query);
 }
 
-QList<Order> OrderDb::db_getOrder4Seller(const int uid) {
+QList<Order> OrderDbHandler::db_getOrder4Seller(const int uid) {
     //跨表查询
     auto db = DbHandlerFactory::getDbHandler("");
     auto query = QString("select o.* from UserTable, OrderTable o, ProductTable "
@@ -145,14 +145,14 @@ QList<Order> OrderDb::db_getOrder4Seller(const int uid) {
                          "ProductTable.pid=o.pid and "
                          "o.ostate!=%2 and o.ostate!=%3"
     ).arg(uid).arg(Ostate::incart).arg(Ostate::userDelete);
-    return OrderDb::queryOrders(db->exec(query));
+    return OrderDbHandler::queryOrders(db->exec(query));
 }
 
-QList<OrderWithFullInfo> OrderDb::getOrdersWithFullInfo(const QList<Order> orders) {
+QList<OrderWithFullInfo> OrderDbHandler::getOrdersWithFullInfo(const QList<Order> orders) {
     QList<OrderWithFullInfo> result;
     for (auto &o:orders) {
-        auto p = ProductDb::db_getProduct(o.getPid());
-        auto u = UserDb::db_getUser(o.getUid());
+        auto p = ProductDbHandler::db_getProduct(o.getPid());
+        auto u = UserDbHandler::db_getUser(o.getUid());
         OrderWithFullInfo oi(o);
         oi.setProduct(p[0]);
         oi.setUser(u[0]);

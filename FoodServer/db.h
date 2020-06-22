@@ -17,30 +17,30 @@ public:
 
     // 准备适用与select、delete的单条件查询
     void queryByInt(const QString &action, const QString &idName, int value) {
-        QString tmp=" * ";
-        if(action=="delete")tmp=" ";
-        query = (action + tmp+"from " + tableName + " where " + idName + "=%1").arg(value);
+        QString tmp = " * ";
+        if (action == "delete")tmp = " ";
+        query = (action + tmp + "from " + tableName + " where " + idName + "=%1").arg(value);
     }
 
     // 准备适用与select、delete的单条件查询
     void queryByString(const QString &action, const QString &idName, const QString &value) {
-        QString tmp=" * ";
-        if(action=="delete")tmp=" ";
-        query = (action + tmp+"from " + tableName + " where " + idName + "=\"%1\"").arg(value);
+        QString tmp = " * ";
+        if (action == "delete")tmp = " ";
+        query = (action + tmp + "from " + tableName + " where " + idName + "=\"%1\"").arg(value);
     }
 
     // 准备适用与select、delete的单条件查询
     void queryAll(const QString &action) {
-        QString tmp=" * ";
-        if(action=="delete")tmp=" ";
-        query = action + tmp+"from " + tableName;
+        QString tmp = " * ";
+        if (action == "delete")tmp = " ";
+        query = action + tmp + "from " + tableName;
     }
 
     // 执行语句
     QSqlQuery &exec() {
         q.exec(query);
         error = q.lastError().text();
-        if (1||logging) {
+        if (logging) {
             qDebug() << getQuery() << "\n" << getError();
         }
         return q;
@@ -77,40 +77,7 @@ private:
 class UserDbHandler : public DataBaseHandler {
 public:
     UserDbHandler() { setTableName("UserTable"); }
-};
 
-class ProductDbHandler : public DataBaseHandler {
-public:
-    ProductDbHandler() { setTableName("ProductTable"); }
-
-};
-
-class OrderDbHandler : public DataBaseHandler {
-public:
-    OrderDbHandler() { setTableName("OrderTable"); }
-};
-
-class DbHandlerFactory {
-public:
-    static std::shared_ptr<DataBaseHandler> getDbHandler(const QString &tableName, bool logging = false) {
-        std::shared_ptr<DataBaseHandler> dbHandler;
-        if (tableName == "UserTable") {
-            dbHandler = std::make_shared<UserDbHandler>();
-        } else if (tableName == "ProductTable") {
-            dbHandler = std::make_shared<ProductDbHandler>();
-        } else if (tableName == "OrderTable") {
-            dbHandler = std::make_shared<OrderDbHandler>();
-        } else {
-            dbHandler = std::make_shared<DataBaseHandler>();
-        }
-        dbHandler->setLogging(logging);
-        return dbHandler;
-    }
-};
-
-// 以静态成员函数的方式封装一系列数据库顶层操作
-class UserDb {
-public:
     static QString getUserClassification(const User &user) {
         QString utype;
         switch (Utype(user.getUtype())) {
@@ -152,8 +119,10 @@ public:
     static QList<User> db_getUser(const QString &username);
 };
 
-class ProductDb {
+class ProductDbHandler : public DataBaseHandler {
 public:
+    ProductDbHandler() { setTableName("ProductTable"); }
+
     static inline QList<Product> queryProducts(QSqlQuery &q) {
         QList<Product> products;
         while (q.next()) {
@@ -179,8 +148,10 @@ public:
     static QList<Product> db_getProduct4Seller(const int uid);//一个商家的所有产品
 };
 
-class OrderDb {
+class OrderDbHandler : public DataBaseHandler {
 public:
+    OrderDbHandler() { setTableName("OrderTable"); }
+
     static QList<Order> queryOrders(QSqlQuery &q) {
         QList<Order> orders;
         while (q.next()) {
@@ -208,5 +179,24 @@ public:
     static QHash<QString, double> getCountByWeek(const QList<Order> &orders);//按周算销售额
     static QList<OrderWithFullInfo> getOrdersWithFullInfo(const QList<Order> orders);
 };
+
+class DbHandlerFactory {
+public:
+    static std::shared_ptr<DataBaseHandler> getDbHandler(const QString &tableName, bool logging = false) {
+        std::shared_ptr<DataBaseHandler> dbHandler;
+        if (tableName == "UserTable") {
+            dbHandler = std::make_shared<UserDbHandler>();
+        } else if (tableName == "ProductTable") {
+            dbHandler = std::make_shared<ProductDbHandler>();
+        } else if (tableName == "OrderTable") {
+            dbHandler = std::make_shared<OrderDbHandler>();
+        } else {
+            dbHandler = std::make_shared<DataBaseHandler>();
+        }
+        dbHandler->setLogging(logging);
+        return dbHandler;
+    }
+};
+
 
 #endif //DB_H

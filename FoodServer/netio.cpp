@@ -10,13 +10,13 @@ NetIO::NetIO(QByteArray _buffer) : buffer(_buffer) {}
 
 // 输入请求编号1、用户
 // 输出回复编号1、状态、失败原因or完整用户信息
-void NetIO::handle_userRegister(QDataStream &reader, QDataStream &writter) {
+void NetIO::userRegister(QDataStream &reader, QDataStream &writter) {
     User user;
     reader >> user;
-    if (!UserDb::db_addUser(user)) {
+    if (!UserDbHandler::db_addUser(user)) {
         writter << taskid << false << "添加失败：用户名重复";
     } else {
-        auto users = UserDb::db_getUser(user.getUname());
+        auto users = UserDbHandler::db_getUser(user.getUname());
         if (users.isEmpty()) {
             writter << taskid << false << "查询失败：未知错误";
         } else {
@@ -27,17 +27,17 @@ void NetIO::handle_userRegister(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号2、用户
 // 输出回复编号2、状态、失败原因or完整用户信息
-void NetIO::handle_userLogin(QDataStream &reader, QDataStream &writter) {
+void NetIO::userLogin(QDataStream &reader, QDataStream &writter) {
     User user;
     reader >> user;
-    auto users = UserDb::db_getUser(user.getUname());
+    auto users = UserDbHandler::db_getUser(user.getUname());
     if (users.isEmpty()) {
         writter << taskid << "用户名不存在";
     } else {
         if (users[0].getPassword() != user.getPassword()) {
             writter << taskid << false << "用户密码错误";
-        } else if (UserDb::getUserClassification(users[0])
-                   != UserDb::getUserClassification(user)) {
+        } else if (UserDbHandler::getUserClassification(users[0])
+                   != UserDbHandler::getUserClassification(user)) {
             writter << taskid << false << "用户类型错误";
         } else {
             writter << taskid << true << users[0];
@@ -47,47 +47,47 @@ void NetIO::handle_userLogin(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号3、商家id
 // 输出回复编号3、状态、属于商家的所有产品
-void NetIO::handle_sellerViewProduct(QDataStream &reader, QDataStream &writter) {
+void NetIO::sellerViewProduct(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
-    writter << taskid << true << ProductDb::db_getProduct4Seller(uid);
+    writter << taskid << true << ProductDbHandler::db_getProduct4Seller(uid);
 }
 
 // 输入请求编号4、新产品
 // 输出回复编号4、状态、属于商家的所有产品
-void NetIO::handle_sellerAddProduct(QDataStream &reader, QDataStream &writter) {
+void NetIO::sellerAddProduct(QDataStream &reader, QDataStream &writter) {
     Product product;
     reader >> product;
-    ProductDb::db_addProduct(product);
+    ProductDbHandler::db_addProduct(product);
     int uid = product.getUid();
-    writter << taskid << true << ProductDb::db_getProduct4Seller(uid);
+    writter << taskid << true << ProductDbHandler::db_getProduct4Seller(uid);
 }
 
 // 输入请求编号5、修改后的产品
 // 输出回复编号5、状态、属于商家的所有产品
-void NetIO::handle_sellerChangeProduct(QDataStream &reader, QDataStream &writter) {
+void NetIO::sellerChangeProduct(QDataStream &reader, QDataStream &writter) {
     Product product;
     reader >> product;
-    ProductDb::db_delProduct(product.getPid());
-    ProductDb::db_addProduct(product, true);
+    ProductDbHandler::db_delProduct(product.getPid());
+    ProductDbHandler::db_addProduct(product, true);
     int uid = product.getUid();
-    writter << taskid << true << ProductDb::db_getProduct4Seller(uid);
+    writter << taskid << true << ProductDbHandler::db_getProduct4Seller(uid);
 }
 
 // 输入请求编号6
 // 输出回复编号6、状态、所有产品
-void NetIO::handle_buyerViewProduct(QDataStream &reader, QDataStream &writter) {
-    writter << taskid << true << ProductDb::db_getProduct();
+void NetIO::buyerViewProduct(QDataStream &reader, QDataStream &writter) {
+    writter << taskid << true << ProductDbHandler::db_getProduct();
 }
 
 // 输入请求编号7、订单
 // 输出回复编号7、状态、促销信息
-void NetIO::handle_buyerAddOrder(QDataStream &reader, QDataStream &writter) {
+void NetIO::buyerAddOrder(QDataStream &reader, QDataStream &writter) {
 //    qDebug() << "添加订单";
     Order order;
     User user;
     reader >> order >> user;
-    OrderDb::db_addOrder(order);
+    OrderDbHandler::db_addOrder(order);
     QString info;
     switch (Utype(user.getUtype())) {
         case vip1:
@@ -107,29 +107,29 @@ void NetIO::handle_buyerAddOrder(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号8、商家id
 // 输出回复编号8、状态、属于商家的订单
-void NetIO::handle_sellerViewOrder(QDataStream &reader, QDataStream &writter) {
+void NetIO::sellerViewOrder(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
-    qDebug()<<"uid = "<<uid;
-    auto orders = OrderDb::db_getOrder4Seller(uid);
-    qDebug()<<"orders.size() = "<<orders.size();
-    auto fullOrders = OrderDb::getOrdersWithFullInfo(orders);
+    qDebug() << "uid = " << uid;
+    auto orders = OrderDbHandler::db_getOrder4Seller(uid);
+    qDebug() << "orders.size() = " << orders.size();
+    auto fullOrders = OrderDbHandler::getOrdersWithFullInfo(orders);
     writter << taskid << true << fullOrders;
 }
 
 // 输入请求编号9、订单
 // 输出回复编号9、状态、属于商家的订单
-void NetIO::handle_sellerChangeOrder(QDataStream &reader, QDataStream &writter) {
+void NetIO::sellerChangeOrder(QDataStream &reader, QDataStream &writter) {
     OrderWithFullInfo order;
     reader >> order;
 
-    OrderDb::db_delOrder(order.getOid());
-    OrderDb::db_addOrder(order, true);
+    OrderDbHandler::db_delOrder(order.getOid());
+    OrderDbHandler::db_addOrder(order, true);
     // 在服务端补充订单表的信息
-    auto p = ProductDb::db_getProduct(order.getPid());
-    auto orders = OrderDb::db_getOrder4Seller(p[0].getUid());
-    auto fullOrders = OrderDb::getOrdersWithFullInfo(orders);
-    qDebug()<<"fullOrders.size() = "<<fullOrders.size();
+    auto p = ProductDbHandler::db_getProduct(order.getPid());
+    auto orders = OrderDbHandler::db_getOrder4Seller(p[0].getUid());
+    auto fullOrders = OrderDbHandler::getOrdersWithFullInfo(orders);
+    qDebug() << "fullOrders.size() = " << fullOrders.size();
     writter << taskid << true << fullOrders;
     //根据历史订单添加vip信息
     updateVip(order.getUid());
@@ -138,13 +138,13 @@ void NetIO::handle_sellerChangeOrder(QDataStream &reader, QDataStream &writter) 
 // 更新vip等级，输入订餐者id
 void NetIO::updateVip(int uid) {
     double historyPay = 0;
-    auto orders = OrderDb::db_getOrder(uid);
+    auto orders = OrderDbHandler::db_getOrder(uid);
     for (auto &order:orders) {
         if (order.getOstate() == 2) {
             historyPay += order.getOpay();
         }
     }
-    auto user = UserDb::db_getUser(uid)[0];
+    auto user = UserDbHandler::db_getUser(uid)[0];
     int historyUtype = user.getUtype();
     if (historyPay >= 500) {
         user.setUtype(vip2);
@@ -152,28 +152,28 @@ void NetIO::updateVip(int uid) {
         user.setUtype(vip1);
     }
     if (user.getUtype() != historyUtype) {
-        UserDb::db_updateUserType(user);
+        UserDbHandler::db_updateUserType(user);
     }
 }
 
 // 输入请求编号10、用户id
 // 输出回复编号10、状态、属于用户的订单
-void NetIO::handle_buyerViewOrder(QDataStream &reader, QDataStream &writter) {
+void NetIO::buyerViewOrder(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
-    auto orders = OrderDb::db_getOrder(uid);
-    auto fullOrders = OrderDb::getOrdersWithFullInfo(orders);
+    auto orders = OrderDbHandler::db_getOrder(uid);
+    auto fullOrders = OrderDbHandler::getOrdersWithFullInfo(orders);
     writter << taskid << true << fullOrders;
 }
 
 // 输入请求编号11、用户id
 // 输出回复编号11、状态、属于用户的订单
-void NetIO::handle_buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
+void NetIO::buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
 //    qDebug() << "修改订餐者订单";
     OrderWithFullInfo order;
     User user;
     reader >> order >> user;
-    OrderDb::db_delOrder(order.getOid());
+    OrderDbHandler::db_delOrder(order.getOid());
     if (order.getOstate() != userDelete) {
         switch (Utype(user.getUtype())) {
             case vip1:
@@ -188,18 +188,18 @@ void NetIO::handle_buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
         double pay = user.pay(order.getPrice() * order.getOnum());
 //        qDebug() << "pay: " << pay;
         order.setOpay(pay);
-        OrderDb::db_addOrder(order, true);
+        OrderDbHandler::db_addOrder(order, true);
     }
-    auto orders = OrderDb::db_getOrder(order.getUid());
-    auto fullOrders = OrderDb::getOrdersWithFullInfo(orders);
+    auto orders = OrderDbHandler::db_getOrder(order.getUid());
+    auto fullOrders = OrderDbHandler::getOrdersWithFullInfo(orders);
     writter << taskid << true << fullOrders;
 }
 
 // 输入请求编号12
 // 输出回复编号12、状态、字符串日志
-void NetIO::handle_monthSalesCount(QDataStream &reader, QDataStream &writter) {
-    auto result = OrderDb::db_getOrderDone();
-    auto ret = OrderDb::getCountByMonth(result);
+void NetIO::monthSalesCount(QDataStream &reader, QDataStream &writter) {
+    auto result = OrderDbHandler::db_getOrderDone();
+    auto ret = OrderDbHandler::getCountByMonth(result);
     QString info = "月销售额日志：\n";
     for (auto it = ret.cbegin(); it != ret.cend(); it++) {
         info.append(it.key());
@@ -210,9 +210,9 @@ void NetIO::handle_monthSalesCount(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号13
 // 输出回复编号13、状态、字符串日志
-void NetIO::handle_weekSalesCount(QDataStream &reader, QDataStream &writter) {
-    auto result = OrderDb::db_getOrderDone();
-    auto ret = OrderDb::getCountByWeek(result);
+void NetIO::weekSalesCount(QDataStream &reader, QDataStream &writter) {
+    auto result = OrderDbHandler::db_getOrderDone();
+    auto ret = OrderDbHandler::getCountByWeek(result);
     QString info = "周销售额日志：\n";
     for (auto it = ret.cbegin(); it != ret.cend(); it++) {
         info.append(it.key());
@@ -224,62 +224,62 @@ void NetIO::handle_weekSalesCount(QDataStream &reader, QDataStream &writter) {
 QByteArray NetIO::process() {
     QDataStream reader(&buffer, QIODevice::ReadOnly);
     reader >> taskid;
-    qDebug()<<"taskid = "<<taskid;
+    qDebug() << "taskid = " << taskid;
     QByteArray result;
     QDataStream writter(&result, QIODevice::WriteOnly);
     qint64 dataSize = 0;
     writter << dataSize;
     switch (taskid) {
-        case 1: {//添加新用户
-            handle_userRegister(reader, writter);
+        case USER_REGISTER: {//添加新用户
+            userRegister(reader, writter);
             break;
         }
-        case 2: {
-            handle_userLogin(reader, writter);
+        case USER_LOGIN: {
+            userLogin(reader, writter);
             break;
         }
-        case 3: {
-            handle_sellerViewProduct(reader, writter);
+        case SELLER_VIEW_PRODUCT: {
+            sellerViewProduct(reader, writter);
             break;
         }
-        case 4: {
-            handle_sellerAddProduct(reader, writter);
+        case SELLER_ADD_PRODUCT: {
+            sellerAddProduct(reader, writter);
             break;
         }
-        case 5: {
-            handle_sellerChangeProduct(reader, writter);
+        case SELLER_CHANGE_PRODUCT: {
+            sellerChangeProduct(reader, writter);
             break;
         }
-        case 6: {//订餐者查看推荐产品
-            handle_buyerViewProduct(reader, writter);
+        case BUYER_VIEW_PRODUCT: {//订餐者查看所有产品
+            buyerViewProduct(reader, writter);
             break;
         }
-        case 7: {//订餐者添加订单
-            handle_buyerAddOrder(reader, writter);
+        case BUYER_ADD_ORDER: {//订餐者添加订单
+            buyerAddOrder(reader, writter);
             break;
         }
-        case 8: {//商家查看订单
-            handle_sellerViewOrder(reader, writter);
+        case SELLER_VIEW_ORDER: {//商家查看订单
+            sellerViewOrder(reader, writter);
             break;
         }
-        case 9: {//商家修改订单
-            handle_sellerChangeOrder(reader, writter);
+        case SELLER_CHANGE_ORDER: {//商家修改订单
+            sellerChangeOrder(reader, writter);
             break;
         }
-        case 10: {//用户查看订单
-            handle_buyerViewOrder(reader, writter);
+        case USER_VIEW_ORDER: {//用户查看订单
+            buyerViewOrder(reader, writter);
             break;
         }
-        case 11: {//用户修改订单
-            handle_buyerChangeOrder(reader, writter);
+        case USER_CHANGE_ORDER: {//用户修改订单
+            buyerChangeOrder(reader, writter);
             break;
         }
-        case 12: {//月销售额
-            handle_monthSalesCount(reader, writter);
+        case COUNT_MONTH_SALE: {//月销售额
+            monthSalesCount(reader, writter);
             break;
         }
-        case 13: {//周销售额
-            handle_weekSalesCount(reader, writter);
+        case COUNT_WEEK_SALE: {//周销售额
+            weekSalesCount(reader, writter);
             break;
         }
         default:
