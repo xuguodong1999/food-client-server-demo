@@ -15,34 +15,35 @@ SOURCES += \
     orderform.cpp \
     product.cpp \
     productform.cpp \
+    todoform.cpp \
     user.cpp \
     userform.cpp \
-    usertodoform.cpp \
     viewwidget.cpp
 
 HEADERS += \
+    config.h \
     mainwidget.h \
     order.h \
     orderform.h \
     product.h \
     productform.h \
+    todoform.h \
     user.h \
     userform.h \
-    usertodoform.h \
     viewwidget.h
 
 FORMS += \
     orderform.ui \
     productform.ui \
+    todoform.ui \
     userform.ui \
-    usertodoform.ui \
     viewwidget.ui
 
 RESOURCES += \
     image.qrc
 
 msvc {
-    # RC_ICONS = img/win.ico
+    RC_ICONS = ./food.ico
     QMAKE_CFLAGS += /utf-8
     QMAKE_CXXFLAGS += /utf-8
 }

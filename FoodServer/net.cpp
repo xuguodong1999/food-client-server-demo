@@ -110,9 +110,9 @@ void ServerNetService::buyerAddOrder(QDataStream &reader, QDataStream &writter) 
 void ServerNetService::sellerViewOrder(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
-    qDebug() << "uid = " << uid;
+//    qDebug() << "uid = " << uid;
     auto orders = OrderDbHandler::db_getOrder4Seller(uid);
-    qDebug() << "orders.size() = " << orders.size();
+//    qDebug() << "orders.size() = " << orders.size();
     auto fullOrders = OrderDbHandler::getOrdersWithFullInfo(orders);
     writter << taskid << true << fullOrders;
 }
@@ -129,7 +129,7 @@ void ServerNetService::sellerChangeOrder(QDataStream &reader, QDataStream &writt
     auto p = ProductDbHandler::db_getProduct(order.getPid());
     auto orders = OrderDbHandler::db_getOrder4Seller(p[0].getUid());
     auto fullOrders = OrderDbHandler::getOrdersWithFullInfo(orders);
-    qDebug() << "fullOrders.size() = " << fullOrders.size();
+//    qDebug() << "fullOrders.size() = " << fullOrders.size();
     writter << taskid << true << fullOrders;
     //根据历史订单添加vip信息
     updateVip(order.getUid());
