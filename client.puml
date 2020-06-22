@@ -1,0 +1,256 @@
+@startuml
+' 数据表部分
+class User {
+    +User()
+    +int getUid() const
+    +int getUtype()
+    +void setUtype(Utype utype)
+    +void setUid(int uid)
+    +const QString &getUname()
+    +void setUname(const QString &uname)
+    +const QString &getPassword()
+    +void setPassword(const QString &password)
+    +const QString &getPhoto()
+    +void setPhoto(const QString &photo)
+    -int uid
+    -int utype
+    -QString uname
+    -QString password
+    -QString photo
+}
+class Product {
+    +Product()
+    +int getPid()
+    +void setPid(int pid)id = pid
+    +int getUid()id
+    +void setUid(int uid)
+    +const QString &getPname()
+    +void setPname(const QString &pname)
+    +const QString &getPinfo()
+    +void setPinfo(const QString &pinfo)
+    +const QString &getPhoto()
+    +void setPhoto(const QString &photo)
+    +double getPrice()
+    +void setPrice(double price)
+    +int getPstate()
+    +void setPstate(Pstate pstate)
+    -int pid
+    -int uid
+    -int pstate
+    -QString pname
+    -QString pinfo
+    -QString photo
+    -double price
+}
+class Order {
+    #int oid
+    #int uid
+    #int pid
+    #int ostate
+    #int onum
+    #double opay
+    #QString submittime
+    +Order()
+    +int getOid()
+    +void setOid(int oid)
+    +int getUid()
+    +void setUid(int uid)
+    +int getPid()
+    +void setPid(int pid)
+    +int getOnum()
+    +void setOnum(int onum)
+    +double getOpay()
+    +void setOpay(double opay)
+    +const QString &getSubmittime()
+    +void setSubmittime(const QString &submittime)
+    +int getOstate()
+    +void setOstate(Ostate ostate)
+}
+class OrderWithFullInfo  {
+    -double price
+    -QString uname
+    -QString pname
+    -QString photo
+    + OrderWithFullInfo()
+    +OrderWithFullInfo(const Order &order)
+    +void setProduct(const Product &product)
+    +void setUser(const User &user)
+    +const QString &getUname()
+    +const QString &getPname()
+    +const QString &getPhoto()
+    +double getPrice()
+}
+' 功能窗体 建造者模式
+class TodoForm {
+    +explicit TodoForm(QWidget *parent = nullptr)
+    +~TodoForm()
+    +void setUser(const User &user)
+    +QToolButton *getBtn1()
+    +QToolButton *getBtn2()
+    +QLabel *getHint()
+    +QLabel *getUinfo()
+    -Ui::TodoForm *ui
+}
+class TodoFormBuilder {
+    +TodoFormBuilder()
+    +{abstract} void buildUserInfo(const User &user)
+    +{abstract} void buildBtn1()
+    +{abstract} void buildBtn2()
+    +TodoForm *createTodoForm()
+    #TodoForm *userTodoForm
+}
+class BuyerTodoBuilder {
+    +void buildUserInfo(const User &user)
+    +void buildBtn1()
+    +void buildBtn2()
+}
+class SellerTodoBuilder {
+    +void buildUserInfo(const User &user)
+    + void buildBtn1()
+    + void buildBtn2()
+}
+class AdminTodoBuilder  {
+    +void buildUserInfo(const User &user)
+    +void buildBtn1()
+    +void buildBtn2()
+}
+class TodoFormController {
+    +TodoForm *createUserTodoForm(TodoFormBuilder *todoBuilder, const User &user)
+}
+class UserForm {
+    +explicit UserForm(QWidget *parent = nullptr)
+    +~UserForm()
+    +User getUser()
+    +void update(const User &user)
+    +QToolButton *getLogin()
+    +QToolButton *getRegister()
+    -Ui::UserForm *ui
+}
+class ProductForm {
+   + explicit ProductForm(QWidget *parent = nullptr)
+    +~ProductForm()
+    +QToolButton *getPhotoBtn()
+   + QToolButton *getFuncBtn()
+   + QLineEdit *getUnameEdit()
+   + QLineEdit *getPnameEdit()
+   +QLineEdit *getPinfoEdit()
+   + QDoubleSpinBox *getPriceBox()
+    +QComboBox *getPstateBox()
+   + void setProduct(const Product &product)
+    +Product getProduct()
+    +void setDisplayOnly()
+    -Ui::ProductForm *ui
+    -Product p
+   - bool isSellerForm
+}
+class OrderForm  {
+    +explicit OrderForm(QWidget *parent = nullptr)
+    +~OrderForm()
+    +void setOrder(const OrderWithFullInfo &o)
+    +void setBuyerMode()
+   + void setSellerMode()
+   + OrderWithFullInfo getOrder()
+   + QToolButton *getPhotoBtn()
+    +QToolButton *getBtn1()
+  +  QToolButton *getBtn2()
+   + QLineEdit *getPnameEdit()
+    +QLineEdit *getUpdateEdit()
+   + QDoubleSpinBox *getOpayBox()
+    +QSpinBox *getOnumBox()
+    +QComboBox *getOstateBox()
+    -Ui::OrderForm *ui
+    -OrderWithFullInfo order
+}
+class ViewWidget {
+    +explicit ViewWidget(QWidget *parent = nullptr)
+    +~ViewWidget()
+    +QScrollArea *getContent()
+    +QToolButton *getBackBtn()
+    +QToolButton *getUpdateBtn()
+    +void setUinfo(const User &user)
+    +void setHint(const QString &hint)
+    +void updateContent(QList<QWidget *> &widgets)
+   - Ui::ViewWidget *ui
+}
+class MainWidget{
+    +explicit MainWidget(QWidget *parent = nullptr)
+    +~MainWidget()
+    '  网络通信部分
+    -User user
+    -bool isConnected
+    -QTcpSocket *socket
+    -qint64 toReceiveBufferSize
+   - QByteArray toAppendBuffer
+    -const QHostAddress addr
+   - const int port
+    -void send(const QByteArray &binaryData)
+   - void process(TaskId taskid, QDataStream &reader)
+    -void requestSellerAddProduct()
+    -void requestSellerChangeProduct()
+    -void requestUserAddOrder()
+    -void requestSellerChangeOrder(bool accept = true)
+    -void requestBuyerChangeOrder(bool accept = true)
+   - void requestSellerProductView()
+   - void requestSellerOrderView()
+    -void requestBuyerProductView()
+    -void requestBuyerOrderView()
+    -void requestMonthSaleCount()
+    -void requestWeekSaleCount()
+    '  GUI部分
+   - void popWarning(const QString &info)
+    -void popUserTodoForm(const User &user)
+    -void popSellerProductView(QList<Product> &products)
+   - void popBuyerProductView(QList<Product> &products)
+   - void popSellerOrderView(QList<OrderWithFullInfo> &orders)
+  -  void popBuyerOrderView(QList<OrderWithFullInfo> &orders)
+   - void popBuyerAddOrderMessage()
+   - void popBuyerGotoOrderViewMessage(const QString &info)
+   - void popBuyerSubmitOrderMessage()
+    -void popBuyerCancelOrderMessage()
+    -void popSellerAcceptOrderMessage()
+    -void popSellerCancelOrderMessage()
+    -void popSellerRefreshProductMessage()
+    -void updateView()
+    -void closeView()
+    -void closeProductForm()
+    -UserForm *userform
+    -TodoForm *userTodoForm
+    -ViewWidget *view
+    -ProductForm *currentProductForm
+   - OrderForm *currentOrderForm
+}
+OrderWithFullInfo ..> Product
+OrderWithFullInfo ..> User
+MainWidget o--> User
+Order <|-- OrderWithFullInfo
+
+TodoForm --|> QWidget
+UserForm --|> QWidget
+ProductForm --|> QWidget
+OrderForm --|> QWidget
+ViewWidget --|> QWidget
+MainWidget --|> QWidget
+
+TodoFormBuilder<|--BuyerTodoBuilder
+TodoFormBuilder<|--SellerTodoBuilder
+TodoFormBuilder <|--AdminTodoBuilder
+TodoFormController o--> TodoFormBuilder 
+
+BuyerTodoBuilder --> TodoForm
+SellerTodoBuilder --> TodoForm
+AdminTodoBuilder --> TodoForm
+MainWidget o--> TodoForm
+
+MainWidget o--> ViewWidget
+ViewWidget ..> User
+
+MainWidget o--> UserForm
+UserForm ..> User
+
+MainWidget ..> ProductForm
+Product <--ProductForm
+
+MainWidget ..> OrderForm
+Order <--o OrderForm
+OrderWithFullInfo <.. OrderForm
+@enduml

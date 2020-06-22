@@ -5,6 +5,7 @@ build-*
 .idea/
 *.pro.user
 *backup*
+out/
 
 # Prerequisites
 *.d
