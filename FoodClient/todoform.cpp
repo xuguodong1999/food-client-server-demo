@@ -30,13 +30,13 @@ QLabel *TodoForm::getUinfo() {
 void TodoForm::setUser(const User &user) {
     switch (user.getUtype()) {
         case 1:
-            getUinfo()->setText("欢迎订餐者：" + user.getUname());
+            getUinfo()->setText("订餐者：" + user.getUname());
             break;
         case 3:
-            getUinfo()->setText("欢迎vip1：" + user.getUname());
+            getUinfo()->setText("VIP1：" + user.getUname());
             break;
         case 4:
-            getUinfo()->setText("欢迎vip2：" + user.getUname());
+            getUinfo()->setText("VIP2：" + user.getUname());
             break;
     }
 }

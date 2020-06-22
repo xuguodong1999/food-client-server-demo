@@ -382,6 +382,7 @@ void MainWidget::popUserTodoForm(const User &user) {
             connect(userTodoForm->getBtn2(), &QToolButton::clicked,
                     this, &MainWidget::requestBuyerOrderView);
     }
+    delete builder;
     userTodoForm->setParent(this);
     userform->close();
     userTodoForm->show();

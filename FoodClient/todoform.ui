@@ -31,9 +31,9 @@
             <property name="font">
                 <font>
                     <family>Arial</family>
-                    <pointsize>18</pointsize>
-                    <weight>50</weight>
-                    <bold>false</bold>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
                 </font>
             </property>
             <property name="text">
@@ -55,9 +55,9 @@
             <property name="font">
                 <font>
                     <family>Arial</family>
-                    <pointsize>18</pointsize>
-                    <weight>50</weight>
-                    <bold>false</bold>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
                 </font>
             </property>
             <property name="text">
