@@ -1,4 +1,4 @@
-#include "netio.h"
+#include "net.h"
 #include "db.h"
 #include "foodserver.h"
 
@@ -22,7 +22,7 @@ FoodServer::FoodServer() {
             auto socket = server->nextPendingConnection();
             connect(socket, &QTcpSocket::readyRead, [=]() {
                 // 处理网络流
-                NetIO netio(socket->readAll());
+                ServerNetService netio(socket->readAll());
                 socket->write(netio.process());
             });
             connect(socket, &QTcpSocket::disconnected, [=]() {

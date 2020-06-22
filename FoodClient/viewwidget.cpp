@@ -37,3 +37,20 @@ void ViewWidget::setHint(const QString &hint) {
 QToolButton *ViewWidget::getUpdateBtn() {
     return ui->update;
 }
+
+void ViewWidget::setUinfo(const User &user) {
+    switch (Utype(user.getUtype())) {
+        case buyer:
+            ui->uinfo->setText("欢迎订餐者：" + user.getUname());
+            break;
+        case seller:
+            ui->uinfo->setText("欢迎商家：" + user.getUname());
+            break;
+        case vip1:
+            ui->uinfo->setText("欢迎vip1：" + user.getUname());
+            break;
+        case vip2:
+            ui->uinfo->setText("欢迎vip2：" + user.getUname());
+            break;
+    }
+}

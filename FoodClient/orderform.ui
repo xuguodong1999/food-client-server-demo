@@ -1,405 +1,405 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>OrderForm</class>
- <widget class="QWidget" name="OrderForm">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>880</width>
-    <height>220</height>
-   </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>600</width>
-    <height>220</height>
-   </size>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <widget class="QToolButton" name="photo">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>200</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>200</width>
-     <height>200</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>200</width>
-     <height>200</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>餐品图片</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>200</width>
-     <height>200</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>120</y>
-     <width>221</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,3">
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
-     <number>3</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_5">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>总价</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QDoubleSpinBox" name="opay">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="maximum">
-       <double>1000000.000000000000000</double>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_3">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>70</y>
-     <width>631</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
-     <number>3</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_3">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>最近更新</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="update">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>12</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QToolButton" name="btn1">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>170</y>
-     <width>200</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>11</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>结算</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_5">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>10</y>
-     <width>631</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,3">
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
-     <number>3</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>餐品</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="pname">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>12</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_4">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>120</y>
-     <width>191</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,3">
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
-     <number>3</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>数量</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QSpinBox" name="onum">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_6">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>120</y>
-     <width>181</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,3">
-    <property name="leftMargin">
-     <number>10</number>
-    </property>
-    <property name="topMargin">
-     <number>10</number>
-    </property>
-    <property name="rightMargin">
-     <number>10</number>
-    </property>
-    <property name="bottomMargin">
-     <number>10</number>
-    </property>
-    <item>
-     <widget class="QLabel" name="label_4">
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>状态</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="ostate">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <item>
-       <property name="text">
-        <string>在购物车</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>已提交</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>已完成</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>商家拒收</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>用户删除</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QToolButton" name="btn2">
-   <property name="geometry">
-    <rect>
-     <x>590</x>
-     <y>170</y>
-     <width>200</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>11</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>删除</string>
-   </property>
-  </widget>
- </widget>
- <resources/>
- <connections/>
+    <class>OrderForm</class>
+    <widget class="QWidget" name="OrderForm">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>880</width>
+                <height>220</height>
+            </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>600</width>
+                <height>220</height>
+            </size>
+        </property>
+        <property name="windowTitle">
+            <string>Form</string>
+        </property>
+        <widget class="QToolButton" name="photo">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>200</width>
+                    <height>200</height>
+                </rect>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>200</width>
+                    <height>200</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>200</width>
+                    <height>200</height>
+                </size>
+            </property>
+            <property name="text">
+                <string>餐品图片</string>
+            </property>
+            <property name="iconSize">
+                <size>
+                    <width>200</width>
+                    <height>200</height>
+                </size>
+            </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_2">
+            <property name="geometry">
+                <rect>
+                    <x>450</x>
+                    <y>120</y>
+                    <width>221</width>
+                    <height>51</height>
+                </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,3">
+                <property name="leftMargin">
+                    <number>3</number>
+                </property>
+                <property name="topMargin">
+                    <number>3</number>
+                </property>
+                <property name="rightMargin">
+                    <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                    <number>3</number>
+                </property>
+                <item>
+                    <widget class="QLabel" name="label_5">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>10</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string>总价</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QDoubleSpinBox" name="opay">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="maximum">
+                            <double>1000000.000000000000000</double>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_3">
+            <property name="geometry">
+                <rect>
+                    <x>240</x>
+                    <y>70</y>
+                    <width>631</width>
+                    <height>51</height>
+                </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
+                <property name="leftMargin">
+                    <number>3</number>
+                </property>
+                <property name="topMargin">
+                    <number>3</number>
+                </property>
+                <property name="rightMargin">
+                    <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                    <number>3</number>
+                </property>
+                <item>
+                    <widget class="QLabel" name="label_3">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>10</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string>最近更新</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="update">
+                        <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>12</pointsize>
+                                <weight>50</weight>
+                                <bold>false</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string/>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QToolButton" name="btn1">
+            <property name="geometry">
+                <rect>
+                    <x>360</x>
+                    <y>170</y>
+                    <width>200</width>
+                    <height>41</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Arial</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>结算</string>
+            </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_5">
+            <property name="geometry">
+                <rect>
+                    <x>240</x>
+                    <y>10</y>
+                    <width>631</width>
+                    <height>51</height>
+                </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,3">
+                <property name="leftMargin">
+                    <number>3</number>
+                </property>
+                <property name="topMargin">
+                    <number>3</number>
+                </property>
+                <property name="rightMargin">
+                    <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                    <number>3</number>
+                </property>
+                <item>
+                    <widget class="QLabel" name="label_2">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>10</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string>餐品</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLineEdit" name="pname">
+                        <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>12</pointsize>
+                                <weight>50</weight>
+                                <bold>false</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string/>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_4">
+            <property name="geometry">
+                <rect>
+                    <x>240</x>
+                    <y>120</y>
+                    <width>191</width>
+                    <height>51</height>
+                </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,3">
+                <property name="leftMargin">
+                    <number>3</number>
+                </property>
+                <property name="topMargin">
+                    <number>3</number>
+                </property>
+                <property name="rightMargin">
+                    <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                    <number>3</number>
+                </property>
+                <item>
+                    <widget class="QLabel" name="label_6">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>10</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string>数量</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QSpinBox" name="onum">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="maximum">
+                            <number>100</number>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_6">
+            <property name="geometry">
+                <rect>
+                    <x>690</x>
+                    <y>120</y>
+                    <width>181</width>
+                    <height>51</height>
+                </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,3">
+                <property name="leftMargin">
+                    <number>10</number>
+                </property>
+                <property name="topMargin">
+                    <number>10</number>
+                </property>
+                <property name="rightMargin">
+                    <number>10</number>
+                </property>
+                <property name="bottomMargin">
+                    <number>10</number>
+                </property>
+                <item>
+                    <widget class="QLabel" name="label_4">
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <pointsize>10</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string>状态</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QComboBox" name="ostate">
+                        <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <family>Arial</family>
+                                <weight>75</weight>
+                                <bold>true</bold>
+                            </font>
+                        </property>
+                        <item>
+                            <property name="text">
+                                <string>在购物车</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>已提交</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>已完成</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>商家拒收</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>用户删除</string>
+                            </property>
+                        </item>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QToolButton" name="btn2">
+            <property name="geometry">
+                <rect>
+                    <x>590</x>
+                    <y>170</y>
+                    <width>200</width>
+                    <height>41</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Arial</family>
+                    <pointsize>11</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>删除</string>
+            </property>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
 </ui>

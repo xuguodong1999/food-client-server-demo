@@ -19,9 +19,13 @@ public:
     explicit OrderForm(QWidget *parent = nullptr);
 
     ~OrderForm();
-    void setOrder(const OrderWithFullInfo&o);
+
+    void setOrder(const OrderWithFullInfo &o);
+
     void setBuyerMode();
+
     void setSellerMode();
+
     OrderWithFullInfo getOrder();
 
     QToolButton *getPhotoBtn();

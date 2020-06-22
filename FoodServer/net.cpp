@@ -1,4 +1,4 @@
-#include "netio.h"
+#include "net.h"
 #include "user.h"
 #include "product.h"
 #include "order.h"
@@ -6,11 +6,11 @@
 #include <QList>
 #include <QHash>
 
-NetIO::NetIO(QByteArray _buffer) : buffer(_buffer) {}
+ServerNetService::ServerNetService(QByteArray _buffer) : buffer(_buffer) {}
 
 // 输入请求编号1、用户
 // 输出回复编号1、状态、失败原因or完整用户信息
-void NetIO::userRegister(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::userRegister(QDataStream &reader, QDataStream &writter) {
     User user;
     reader >> user;
     if (!UserDbHandler::db_addUser(user)) {
@@ -27,7 +27,7 @@ void NetIO::userRegister(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号2、用户
 // 输出回复编号2、状态、失败原因or完整用户信息
-void NetIO::userLogin(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::userLogin(QDataStream &reader, QDataStream &writter) {
     User user;
     reader >> user;
     auto users = UserDbHandler::db_getUser(user.getUname());
@@ -47,7 +47,7 @@ void NetIO::userLogin(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号3、商家id
 // 输出回复编号3、状态、属于商家的所有产品
-void NetIO::sellerViewProduct(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::sellerViewProduct(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
     writter << taskid << true << ProductDbHandler::db_getProduct4Seller(uid);
@@ -55,7 +55,7 @@ void NetIO::sellerViewProduct(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号4、新产品
 // 输出回复编号4、状态、属于商家的所有产品
-void NetIO::sellerAddProduct(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::sellerAddProduct(QDataStream &reader, QDataStream &writter) {
     Product product;
     reader >> product;
     ProductDbHandler::db_addProduct(product);
@@ -65,7 +65,7 @@ void NetIO::sellerAddProduct(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号5、修改后的产品
 // 输出回复编号5、状态、属于商家的所有产品
-void NetIO::sellerChangeProduct(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::sellerChangeProduct(QDataStream &reader, QDataStream &writter) {
     Product product;
     reader >> product;
     ProductDbHandler::db_delProduct(product.getPid());
@@ -76,13 +76,13 @@ void NetIO::sellerChangeProduct(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号6
 // 输出回复编号6、状态、所有产品
-void NetIO::buyerViewProduct(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::buyerViewProduct(QDataStream &reader, QDataStream &writter) {
     writter << taskid << true << ProductDbHandler::db_getProduct();
 }
 
 // 输入请求编号7、订单
 // 输出回复编号7、状态、促销信息
-void NetIO::buyerAddOrder(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::buyerAddOrder(QDataStream &reader, QDataStream &writter) {
 //    qDebug() << "添加订单";
     Order order;
     User user;
@@ -107,7 +107,7 @@ void NetIO::buyerAddOrder(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号8、商家id
 // 输出回复编号8、状态、属于商家的订单
-void NetIO::sellerViewOrder(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::sellerViewOrder(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
     qDebug() << "uid = " << uid;
@@ -119,7 +119,7 @@ void NetIO::sellerViewOrder(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号9、订单
 // 输出回复编号9、状态、属于商家的订单
-void NetIO::sellerChangeOrder(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::sellerChangeOrder(QDataStream &reader, QDataStream &writter) {
     OrderWithFullInfo order;
     reader >> order;
 
@@ -136,7 +136,7 @@ void NetIO::sellerChangeOrder(QDataStream &reader, QDataStream &writter) {
 }
 
 // 更新vip等级，输入订餐者id
-void NetIO::updateVip(int uid) {
+void ServerNetService::updateVip(int uid) {
     double historyPay = 0;
     auto orders = OrderDbHandler::db_getOrder(uid);
     for (auto &order:orders) {
@@ -158,7 +158,7 @@ void NetIO::updateVip(int uid) {
 
 // 输入请求编号10、用户id
 // 输出回复编号10、状态、属于用户的订单
-void NetIO::buyerViewOrder(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::buyerViewOrder(QDataStream &reader, QDataStream &writter) {
     int uid;
     reader >> uid;
     auto orders = OrderDbHandler::db_getOrder(uid);
@@ -168,7 +168,7 @@ void NetIO::buyerViewOrder(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号11、用户id
 // 输出回复编号11、状态、属于用户的订单
-void NetIO::buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
 //    qDebug() << "修改订餐者订单";
     OrderWithFullInfo order;
     User user;
@@ -197,7 +197,7 @@ void NetIO::buyerChangeOrder(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号12
 // 输出回复编号12、状态、字符串日志
-void NetIO::monthSalesCount(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::monthSalesCount(QDataStream &reader, QDataStream &writter) {
     auto result = OrderDbHandler::db_getOrderDone();
     auto ret = OrderDbHandler::getCountByMonth(result);
     QString info = "月销售额日志：\n";
@@ -210,7 +210,7 @@ void NetIO::monthSalesCount(QDataStream &reader, QDataStream &writter) {
 
 // 输入请求编号13
 // 输出回复编号13、状态、字符串日志
-void NetIO::weekSalesCount(QDataStream &reader, QDataStream &writter) {
+void ServerNetService::weekSalesCount(QDataStream &reader, QDataStream &writter) {
     auto result = OrderDbHandler::db_getOrderDone();
     auto ret = OrderDbHandler::getCountByWeek(result);
     QString info = "周销售额日志：\n";
@@ -221,7 +221,7 @@ void NetIO::weekSalesCount(QDataStream &reader, QDataStream &writter) {
     writter << taskid << true << info;
 }
 
-QByteArray NetIO::process() {
+QByteArray ServerNetService::process() {
     QDataStream reader(&buffer, QIODevice::ReadOnly);
     reader >> taskid;
     qDebug() << "taskid = " << taskid;
@@ -229,7 +229,7 @@ QByteArray NetIO::process() {
     QDataStream writter(&result, QIODevice::WriteOnly);
     qint64 dataSize = 0;
     writter << dataSize;
-    switch (taskid) {
+    switch (TaskId(taskid)) {
         case USER_REGISTER: {//添加新用户
             userRegister(reader, writter);
             break;

@@ -5,6 +5,8 @@
 #include <QScrollArea>
 #include <QToolButton>
 #include <QList>
+#include "user.h"
+
 namespace Ui {
     class ViewWidget;
 }
@@ -18,10 +20,16 @@ public:
     ~ViewWidget();
 
     QScrollArea *getContent();
-    QToolButton* getBackBtn();
-    QToolButton* getUpdateBtn();
-    void setHint(const QString&hint);
-    void updateContent(QList<QWidget*>&widgets);
+
+    QToolButton *getBackBtn();
+
+    QToolButton *getUpdateBtn();
+
+    void setUinfo(const User &user);
+
+    void setHint(const QString &hint);
+
+    void updateContent(QList<QWidget *> &widgets);
 
 private:
     Ui::ViewWidget *ui;

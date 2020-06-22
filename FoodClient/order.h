@@ -81,7 +81,7 @@ protected:
 #include "product.h"
 #include "user.h"
 
-// 订单类的装饰，对应于用户界面订单表，增加价格、用户名、商品名、商品照片
+// 订单类的完善，对应于用户界面订单表，增加价格、用户名、商品名、商品照片
 class OrderWithFullInfo : public Order {
 private:
     double price;

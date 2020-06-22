@@ -6,10 +6,10 @@
 
 // 网络通信
 // 网络流读写类，根据简单的协议处理请求
-class NetIO {
+class ServerNetService {
     int taskid;
 public:
-    NetIO(QByteArray _buffer);
+    ServerNetService(QByteArray _buffer);
 
     // 输入请求编号1、用户
     // 输出回复编号1、状态、失败原因or完整用户信息

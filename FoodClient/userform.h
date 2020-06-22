@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QToolButton>
 #include "user.h"
+
 namespace Ui {
     class UserForm;
 }
@@ -15,10 +16,15 @@ public:
     explicit UserForm(QWidget *parent = nullptr);
 
     ~UserForm();
+
     User getUser();
-    void update(const User&user);
-    QToolButton*getLogin();
-    QToolButton*getRegister();
+
+    void update(const User &user);
+
+    QToolButton *getLogin();
+
+    QToolButton *getRegister();
+
 private:
     Ui::UserForm *ui;
 };
