@@ -1,0 +1,62 @@
+@startuml
+class DataBaseHandler {
+    +{static} QSqlError initDataBase()
+    +void queryByInt(const QString &action, const QString &idName, int value)
+    +void queryByString(const QString &action, const QString &idName, const QString &value)
+    +void queryAll(const QString &action)
+    +QSqlQuery &exec()
+    +QSqlQuery &exec(const QString &_query)
+    +const QString &getQuery() const
+    +const QString &getError() const
+    +void setLogging(bool logging)
+    #void setTableName(const QString &_name)
+    -QString query
+    -QString error
+    -QString tableName
+    -QSqlQuery q
+    -bool logging
+}
+class UserDbHandler  {
+    +UserDbHandler()
+    +{static} QString getUserClassification(const User &user)
+    +{static} QList<User> queryUsers(QSqlQuery &q)
+    +{static} bool db_addUser(const User &user)
+    +{static} void db_updateUserType(const User &user)
+    +{static} QList<User> db_getUser(const int uid)
+    +{static} QList<User> db_getUser(const QString &username)
+}
+class ProductDbHandler {
+    public:
+    +ProductDbHandler()
+    +{static} inline QList<Product> queryProducts(QSqlQuery &q)
+    +{static} void db_addProduct(const Product &product, bool putId = false)
+    +{static} void db_delProduct(const int pid)
+    +{static} QList<Product> db_getProduct()
+    +{static} QList<Product> db_getProduct(const int pid)
+    +{static} QList<Product> db_getProduct4Seller(const int uid)
+}
+class OrderDbHandler  {
+    public:
+    +OrderDbHandler()
+    +{static} QList<Order> queryOrders(QSqlQuery &q)
+    +{static} void db_addOrder(const Order &order, bool putId = false)
+    +{static} void db_delOrder(const int oid)
+    +{static} QList<Order> db_getOrder(const int uid)
+    +{static}QList<Order> db_getOrderDone()
+    +{static} QList<Order> db_getOrder4Seller(const int uid)
+    +{static} QHash<QString, double> getCountByMonth(const QList<Order> &orders)
+    +{static} QHash<QString, double> getCountByWeek(const QList<Order> &orders)
+    +{static} QList<OrderWithFullInfo> getOrdersWithFullInfo(const QList<Order> orders)
+}
+class DbHandlerFactory {
+    public:
+    +{static} std::shared_ptr<DataBaseHandler> getDbHandler(const QString &tableName, bool logging = false)
+}
+
+UserDbHandler--|> DataBaseHandler
+OrderDbHandler--|> DataBaseHandler
+ProductDbHandler--|> DataBaseHandler
+DbHandlerFactory --> UserDbHandler
+DbHandlerFactory --> ProductDbHandler
+DbHandlerFactory --> OrderDbHandler
+@enduml

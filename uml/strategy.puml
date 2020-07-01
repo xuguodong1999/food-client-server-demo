@@ -1,0 +1,38 @@
+@startuml
+class User {
+    +User()
+    +int getUid() const
+    +int getUtype()
+    +void setUtype(Utype utype)
+    +void setUid(int uid)
+    +const QString &getUname()
+    +void setUname(const QString &uname)
+    +const QString &getPassword()
+    +void setPassword(const QString &password)
+    +const QString &getPhoto()
+    +void setPhoto(const QString &photo)
+    +double pay(double _pay)
+    +void setDiscount(std::shared_ptr<Discount> _discount)
+    -int uid
+    -int utype
+    -QString uname
+    -QString password
+    -QString photo
+    -std::shared_ptr<Discount> discount
+}
+interface Discount {
+    +Discount()
+    +{abstract} double calculate(double price)
+}
+interface Vip1Discount {
+    Vip1Discount()
+    +double calculate(double price)
+}
+interface Vip2Discount  {
+    +Vip2Discount()
+    +double calculate(double price)
+}
+Vip1Discount --|> Discount
+Vip2Discount --|> Discount
+User o--> Discount
+@enduml
